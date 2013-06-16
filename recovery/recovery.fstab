@@ -1,9 +1,17 @@
-# mount point	fstype		device			[device2]
+# recovery.fstab parsing format
+# mountpoint      fstype      device			        [device2]               fstype2
 
-/boot	        bml	        boot	
-/recovery	bml	        recovery	
-/cache	        ext4	        /dev/block/stl14	
-/data	        ext4	        /dev/block/stl13	
-/system	        ext4	        /dev/block/stl12	
-/sdcard	        vfat	        /dev/block/mmcblk0p1	/dev/block/mmcblk0
-/sd-ext         ext4            /dev/block/mmcblk0p2	
+# bml partitions for boot and recovery images
+/boot		          bml		    boot
+/recovery	        bml		    recovery
+
+# internal partitions, marked as rfs if we're on stock
+/cache		        ext4		  /dev/block/stl14                              rfs
+/data		          ext4		  /dev/block/stl13                              rfs
+/system		        ext4		  /dev/block/stl12                              rfs
+
+# sdcard, should not be changed
+/sdcard		        vfat		  /dev/block/mmcblk0p1  /dev/block/mmcblk0
+
+# sd-ext, usually ext4, in fat partition type if we're on stock
+/sd-ext		        ext4		  /dev/block/mmcblk0p2                          vfat
